@@ -1,15 +1,22 @@
-let a = 5
-$.ajax('https://repetitora.net/api/JS/Images', {
-    success: function (data) {
-        console.log('i got response')
-        console.log(data)
-        data.forEach(element => {
-            let img = document.createElement('img')
-            img.src = element.thumbnail
-            document.body.append(img)
-        });
+let addBtn = document.querySelector(".add")
+let input = document.querySelector('.inp')
+console.log(addBtn)
 
-    }
-});
-a = 8
-console.log(a);
+addBtn.addEventListener('click', addImg)
+
+
+function addImg(){
+    $.ajax(`https://repetitora.net/api/JS/Images?page=${input.value}&count=1`, {
+        success: function (data) {
+            console.log('i got response')
+            console.log(data)
+            data.forEach(element => {
+                let img = document.createElement('img')
+                img.src = element.thumbnail
+                document.body.append(img)
+            });
+    
+        }
+    });
+    
+}
