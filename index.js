@@ -3,17 +3,15 @@ let input = document.querySelector('.inp')
 let addTask = document.querySelector('.addTask')
 console.log(addTask)
 
-createTask('hello').then((response)=>{
-    console.log(response)
+addBtn.addEventListener('click', () => {
+    const promise = getImages(input.value)
+    promise.then((data) => { onImagesReceived(data) })
 })
 
-addBtn.addEventListener('click', () => { 
-    const promise = getImages(input.value) 
-    promise.then((data)=>{onImagesReceived(data)})})
-
-addTask.addEventListener('click', ()=>{
-    const promise = getTasks() 
-    promise.then((tasks)=>{onTasksReceived(tasks)})})
+addTask.addEventListener('click', () => {
+    const promise = getTasks()
+    promise.then((tasks) => { onTasksReceived(tasks) })
+})
 
 
 function onImagesReceived(data) {
@@ -26,11 +24,15 @@ function onImagesReceived(data) {
 }
 
 function onTasksReceived(tasks) {
+    document.querySelector('.tasks').innerHTML = ''
     tasks.forEach(element => {
-        let div = document.createElement('div')
-        div.innerHTML = element.title;
-        document.body.append(div)
+        let li = document.createElement('li')
+        li.innerHTML = element.title;
+        document.querySelector('.tasks').appendChild(li)
     });
-
 }
 
+deleteTask('2d3ab72f-443d-42ca-b8c5-58818abeea72')
+// createTask('hello3').then((response) => {
+//     console.log(response)
+// })
