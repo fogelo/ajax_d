@@ -3,6 +3,10 @@ let input = document.querySelector('.inp')
 let addTask = document.querySelector('.addTask')
 console.log(addTask)
 
+createTask('hello').then((response)=>{
+    console.log(response)
+})
+
 addBtn.addEventListener('click', () => { 
     const promise = getImages(input.value) 
     promise.then((data)=>{onImagesReceived(data)})})
@@ -12,7 +16,7 @@ addTask.addEventListener('click', ()=>{
     promise.then((tasks)=>{onTasksReceived(tasks)})})
 
 
-function onIamgesReceived(data) {
+function onImagesReceived(data) {
     data.forEach(element => {
         let img = document.createElement('img')
         img.src = element.thumbnail
@@ -24,12 +28,9 @@ function onIamgesReceived(data) {
 function onTasksReceived(tasks) {
     tasks.forEach(element => {
         let div = document.createElement('div')
-        div.innerHTML = element;
+        div.innerHTML = element.title;
         document.body.append(div)
     });
 
 }
 
-createTask('lern bliatb').then((response)=>{
-    console.log(response)
-})
