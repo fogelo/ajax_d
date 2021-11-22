@@ -1,22 +1,18 @@
 let addBtn = document.querySelector(".add")
 let input = document.querySelector('.inp')
-console.log(addBtn)
+console.log(input)
 
-addBtn.addEventListener('click', addImg)
+addBtn.addEventListener('click', () => { getImages(input.value, onDataReceived) })
 
 
-function addImg(){
-    $.ajax(`https://repetitora.net/api/JS/Images?page=${input.value}&count=1`, {
-        success: function (data) {
-            console.log('i got response')
-            console.log(data)
-            data.forEach(element => {
-                let img = document.createElement('img')
-                img.src = element.thumbnail
-                document.body.append(img)
-            });
-    
-        }
+function onDataReceived(data) {
+    console.log('i got response')
+    console.log(data)
+    console.log('pageNumber: ', pageNumber);
+    data.forEach(element => {
+        let img = document.createElement('img')
+        img.src = element.thumbnail
+        document.body.append(img)
     });
-    
+
 }
